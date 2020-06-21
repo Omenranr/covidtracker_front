@@ -5,7 +5,7 @@ import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import {AppProfile} from './AppProfile';
 import {Route} from 'react-router-dom';
-import { Dashboard, NewsPage } from "./components";
+import { Dashboard, NewsPage, MetricsPage } from "./components";
 import {FormsDemo} from './components/FormsDemo';
 import {SampleDemo} from './components/SampleDemo';
 import {DataDemo} from './components/DataDemo';
@@ -100,8 +100,6 @@ class App extends Component {
 
     createMenu() {
         this.menu = [
-            {label: 'Dashboard', icon: 'pi pi-fw pi-home', command: () => {window.location = '#/'}},
-            {label: 'Latest News', icon: 'pi pi-fw pi-circle-off', to: '/news'},
             {
                 label: 'Menu Colors', icon: 'pi pi-fw pi-align-left',
                 items: [
@@ -109,73 +107,9 @@ class App extends Component {
                     {label: 'Light', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutColorMode: 'light'}) }
                 ]
             },
-            {
-                label: 'Components', icon: 'pi pi-fw pi-globe', badge: '9',
-                items: [
-					{label: 'Sample Page', icon: 'pi pi-fw pi-th-large', to: '/sample'},
-					{label: 'Forms', icon: 'pi pi-fw pi-file', to: '/forms'},
-					{label: 'Data', icon: 'pi pi-fw pi-table', to: '/data'},
-					{label: 'Panels', icon: 'pi pi-fw pi-list', to: '/panels'},
-					{label: 'Overlays', icon: 'pi pi-fw pi-clone', to: '/overlays'},
-					{label: 'Menus', icon: 'pi pi-fw pi-plus', to: '/menus'},
-					{label: 'Messages', icon: 'pi pi-fw pi-spinner',to: '/messages'},
-					{label: 'Charts', icon: 'pi pi-fw pi-chart-bar', to: '/charts'},
-					{label: 'Misc', icon: 'pi pi-fw pi-upload', to: '/misc'}
-                ]
-            },
-            {
-                label: 'Template Pages', icon: 'pi pi-fw pi-file',
-                items: [
-                    {label: 'Empty Page', icon: 'pi pi-fw pi-circle-off', to: '/empty'}
-                ]
-            },
-            {
-                label: 'Menu Hierarchy', icon: 'pi pi-fw pi-search',
-                items: [
-                    {
-                        label: 'Submenu 1', icon: 'pi pi-fw pi-bookmark',
-                        items: [
-                            {
-                                label: 'Submenu 1.1', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    {label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark'},
-                                    {label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark'},
-                                    {label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark'},
-                                ]
-                            },
-                            {
-                                label: 'Submenu 1.2', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    {label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark'},
-                                    {label: 'Submenu 1.2.2', icon: 'pi pi-fw pi-bookmark'}
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        label: 'Submenu 2', icon: 'pi pi-fw pi-bookmark',
-                        items: [
-                            {
-                                label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    {label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark'},
-                                    {label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark'},
-                                    {label: 'Submenu 2.1.3', icon: 'pi pi-fw pi-bookmark'},
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    {label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark'},
-                                    {label: 'Submenu 2.2.2', icon: 'pi pi-fw pi-bookmark'}
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {label: 'Documentation', icon: 'pi pi-fw pi-question', command: () => {window.location = "#/documentation"}},
-            {label: 'View Source', icon: 'pi pi-fw pi-search', command: () => {window.location = "https://github.com/primefaces/sigma"}}
+            {label: 'Dashboard', icon: 'pi pi-fw pi-home', command: () => {window.location = '/'}},
+            {label: 'Latest News', icon: 'pi pi-fw pi-circle-off', to: '/news'},
+            {label: 'Metrics Charts', icon: 'pi pi-fw pi-chart-bar', to: '/metrics'},
         ];
     }
 
@@ -236,6 +170,7 @@ class App extends Component {
                     <div className="layout-main">
                         <Route path="/" exact component={Dashboard} />
                         <Route path="/news" exact component={NewsPage} />
+                        <Route path="/metrics" exact component={MetricsPage} />
                         <Route path="/forms" component={FormsDemo} />
                         <Route path="/sample" component={SampleDemo} />
                         <Route path="/data" component={DataDemo} />
