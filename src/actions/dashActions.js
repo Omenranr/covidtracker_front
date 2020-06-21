@@ -42,7 +42,7 @@ export const getCountryHistorical = (country) => (dispatch, getState) => {
 export const getCountriesHistorical = (countries) => (dispatch, getState) => {
     axios.get("https://disease.sh/v2/historical/"+countries+"?lastdays=all")
     .then(result => {
-        console.log("country historical", result.data)
+        console.log("countries historical", result.data)
         dispatch({type: COUNTRIES_LOADED, payload: result.data})
     })
 }

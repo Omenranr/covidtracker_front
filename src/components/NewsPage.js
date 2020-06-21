@@ -18,7 +18,6 @@ import { AutoComplete } from 'primereact/autocomplete'
 import { getPopularNews } from "../actions/newsActions"
 import { connect } from "react-redux"
 import PropTypes from 'prop-types'
-import uuid from "uuid/v1"
 import NewsCard from './NewsCard'
 import countriesData from '../countries.json'
 

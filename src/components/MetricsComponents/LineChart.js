@@ -27,7 +27,7 @@ const LineChart = (props) => {
 
     return (
         <div>
-            <h3>Covid19 Global</h3>
+            <h3>Covid19 Global {props.country ? " for " + props.country : ""}</h3>
             <Chart type="line" data={data} />
         </div>
     )

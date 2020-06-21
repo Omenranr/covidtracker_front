@@ -256,7 +256,12 @@ const MetricsPage = (props) => {
                             <Button style={{marginLeft: "3%"}} label="Search" className="p-button-raised" onClick={onSearchClick} />
                         </div>
                     </div>
-                    {dataState.countryHistorical ? <LineChart key={"chart2"} data={selectLineModeCountry(dataState.countryHistorical, toShowType)} /> : "Loading..."}
+                    {dataState.countryHistorical ? 
+                        <LineChart 
+                            key={"chart2"} 
+                            country={dataState.countryHistorical.country} 
+                            data={selectLineModeCountry(dataState.countryHistorical, toShowType)} /> 
+                            : "Loading..."}
                 </TabPanel>
                 <TabPanel header="Countries Comparison">
                     Content III
