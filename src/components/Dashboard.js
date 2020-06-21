@@ -17,7 +17,7 @@ import { CoronaDataTable } from "./CoronaDataTable";
 import { getCurrentData, getTotalData } from "../actions/dashActions";
 import { connect } from "react-redux"
 import PropTypes from 'prop-types'
-import uuid from "uuid/v1"
+import { v1 as uuid } from 'uuid'
 
 const Dashboard = (props) => {
 
