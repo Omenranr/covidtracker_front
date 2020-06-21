@@ -27,14 +27,13 @@ const NewsPage = (props) => {
     const [selectedCountry, setSelectedCountry] = useState(null)
     const [newsState, setNewsState] = useState([])
     const countries = countriesData
-    const apiKey = "5f83529652294cacb82961023be11ff0"
     const countriesNames = ["USA", "Brazil", "Russia", "India", "UK", "Spain", "Peru", "Italy", "Chile", "Iran", "Germany", "Turkey", "Pakistan", "Mexico", "France", "Saudi Arabia", "Bangladesh", "Canada", "South Africa", "Qatar", "China", "Colombia", "Belgium", "Belarus", "Sweden", "Egypt", "Ecuador", "Netherlands", "Indonesia", "UAE", "Singapore", "Argentina", "Kuwait", "Portugal", "Ukraine", "Poland", "Switzerland", "Philippines", "Iraq", "Oman", "Afghanistan", "Dominican Republic", "Ireland", "Panama", "Romania", "Bolivia", "Bahrain", "Israel", "Nigeria", "Armenia", "Japan", "Austria", "Kazakhstan", "Moldova", "Ghana", "Serbia", "Guatemala", "Denmark", "S. Korea", "Azerbaijan", "Algeria", "Honduras", "Cameroon", "Czechia", "Morocco", "Norway", "Nepal", "Malaysia", "Sudan", "Australia", "Côte d'Ivoire", "Finland", "Uzbekistan", "Senegal", "DRC", "Tajikistan", "Macedonia", "Haiti", "Guinea", "Djibouti", "Kenya", "El Salvador", "Ethiopia", "Gabon", "Luxembourg", "Hungary", "Bulgaria", "Venezuela", "Bosnia", "Greece", "Thailand", "Kyrgyzstan", "Mauritania", "Somalia", "Central African Republic", "Mayotte", "Cuba", "Croatia", "Maldives", "French Guiana", "Costa Rica", "Estonia", "Sri Lanka", "Mali", "Albania", "South Sudan", "Nicaragua", "Iceland", "Lithuania", "Equatorial Guinea", "Slovakia", "Guinea-Bissau", "Lebanon", "Slovenia", "New Zealand", "Madagascar", "Zambia", "Paraguay", "Sierra Leone", "Tunisia", "Hong Kong", "Latvia", "Niger", "Jordan", "Cyprus", "Yemen", "Burkina Faso", "Georgia", "Congo", "Cabo Verde", "Chad", "Andorra", "Uruguay", "Palestine", "Uganda", "Diamond Princess", "Rwanda", "San Marino", "Sao Tome and Principe", "Mozambique", "Malta", "Jamaica", "Benin", "Swaziland", "Malawi", "Liberia", "Channel Islands", "Togo", "Libyan Arab Jamahiriya", "Tanzania", "Réunion", "Zimbabwe", "Taiwan", "Montenegro", "Vietnam", "Mauritius", "Isle of Man", "Suriname", "Myanmar", "Comoros", "Martinique", "Mongolia", "Syrian Arab Republic", "Cayman Islands", "Faroe Islands", "Guyana", "Angola", "Gibraltar", "Guadeloupe", "Bermuda", "Eritrea", "Brunei", "Cambodia", "Trinidad and Tobago", "Bahamas", "Burundi", "Aruba", "Monaco", "Barbados", "Botswana", "Liechtenstein", "Sint Maarten", "Bhutan", "French Polynesia", "Namibia", "Macao", "Saint Martin", "Gambia", "Saint Vincent and the Grenadines", "Antigua and Barbuda", "Timor-Leste", "Curaçao", "Grenada", "Belize", "New Caledonia", "Lao People's Democratic Republic", "Saint Lucia", "Dominica", "Fiji", "Saint Kitts and Nevis", "Falkland Islands (Malvinas)", "Greenland", "Holy See (Vatican City State)", "Turks and Caicos Islands", "Montserrat", "Seychelles", "MS Zaandam", "Western Sahara", "British Virgin Islands", "Papua New Guinea", "Caribbean Netherlands", "St. Barth", "Lesotho", "Anguilla", "Saint Pierre Miquelon"]
     function nWSpace(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
     }
 
     useEffect(() => {
-        const query = "country=ma&q=covid&from=from=2020-05-20&sortBy=publishedAt&apiKey="+apiKey
+        const query = "country=ma&q=covid&from=from=2020-05-20&sortBy=publishedAt"
         getPopularNews(query)
     }, [])
 
@@ -68,7 +67,7 @@ const NewsPage = (props) => {
     const onSearchClick = () => {
         const query = "country="+
         countries[selectedCountry].iso2.toLowerCase()+
-        "&q=covid&from=from=2020-05-20&sortBy=publishedAt&apiKey="+apiKey
+        "&q=covid&from=from=2020-05-20&sortBy=publishedAt"
         getPopularNews(query)
     }
 

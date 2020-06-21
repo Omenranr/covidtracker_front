@@ -4,7 +4,7 @@ import {
 } from "./types";
 
 export const getPopularNews = (query) => (dispatch, getState) => {
-    axios.get("http://newsapi.org/v2/top-headlines?"+query)
+    axios.get("http://localhost:4000/news/byCountry?"+query)
     .then(result => {
         console.log(result.data)
         let articles = result.data.articles.filter(ar => ar.urlToImage !== null)
