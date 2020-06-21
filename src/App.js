@@ -5,7 +5,7 @@ import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import {AppProfile} from './AppProfile';
 import {Route} from 'react-router-dom';
-import {Dashboard} from './components/Dashboard';
+import { Dashboard, NewsPage } from "./components";
 import {FormsDemo} from './components/FormsDemo';
 import {SampleDemo} from './components/SampleDemo';
 import {DataDemo} from './components/DataDemo';
@@ -27,12 +27,15 @@ import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
 
+import {Provider} from 'react-redux'
+import store from './store'
+
 class App extends Component {
 
     constructor() {
         super();
         this.state = {
-            layoutMode: 'static',
+            layoutMode: 'overlay',
             layoutColorMode: 'dark',
             staticMenuInactive: false,
             overlayMenuActive: false,
@@ -98,13 +101,7 @@ class App extends Component {
     createMenu() {
         this.menu = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', command: () => {window.location = '#/'}},
-            {
-                label: 'Menu Modes', icon: 'pi pi-fw pi-cog',
-                items: [
-                    {label: 'Static Menu', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutMode: 'static'}) },
-                    {label: 'Overlay Menu', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutMode: 'overlay'}) }
-                ]
-            },
+            {label: 'Latest News', icon: 'pi pi-fw pi-circle-off', to: '/news'},
             {
                 label: 'Menu Colors', icon: 'pi pi-fw pi-align-left',
                 items: [
@@ -224,36 +221,39 @@ class App extends Component {
         });
 
         return (
-            <div className={wrapperClass} onClick={this.onWrapperClick}>
-                <AppTopbar onToggleMenu={this.onToggleMenu}/>
+            <Provider store={store}>
+                <div className={wrapperClass} onClick={this.onWrapperClick}>
+                    <AppTopbar onToggleMenu={this.onToggleMenu}/>
 
-                <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
-                    <div className="layout-logo">
-                        <img alt="Logo" src={logo} />
+                    <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
+                        <div className="layout-logo">
+                            <img alt="Logo" src={logo} />
+                        </div>
+                        <AppProfile />
+                        <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
                     </div>
-                    <AppProfile />
-                    <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
+
+                    <div className="layout-main">
+                        <Route path="/" exact component={Dashboard} />
+                        <Route path="/news" exact component={NewsPage} />
+                        <Route path="/forms" component={FormsDemo} />
+                        <Route path="/sample" component={SampleDemo} />
+                        <Route path="/data" component={DataDemo} />
+                        <Route path="/panels" component={PanelsDemo} />
+                        <Route path="/overlays" component={OverlaysDemo} />
+                        <Route path="/menus" component={MenusDemo} />
+                        <Route path="/messages" component={MessagesDemo} />
+                        <Route path="/charts" component={ChartsDemo} />
+                        <Route path="/misc" component={MiscDemo} />
+                        <Route path="/empty" component={EmptyPage} />
+                        <Route path="/documentation" component={Documentation} />
+                    </div>
+
+                    <AppFooter />
+
+                    <div className="layout-mask"></div>
                 </div>
-
-                <div className="layout-main">
-                    <Route path="/" exact component={Dashboard} />
-                    <Route path="/forms" component={FormsDemo} />
-                    <Route path="/sample" component={SampleDemo} />
-                    <Route path="/data" component={DataDemo} />
-                    <Route path="/panels" component={PanelsDemo} />
-                    <Route path="/overlays" component={OverlaysDemo} />
-                    <Route path="/menus" component={MenusDemo} />
-                    <Route path="/messages" component={MessagesDemo} />
-                    <Route path="/charts" component={ChartsDemo} />
-                    <Route path="/misc" component={MiscDemo} />
-                    <Route path="/empty" component={EmptyPage} />
-                    <Route path="/documentation" component={Documentation} />
-                </div>
-
-                <AppFooter />
-
-                <div className="layout-mask"></div>
-            </div>
+            </Provider>
         );
     }
 }

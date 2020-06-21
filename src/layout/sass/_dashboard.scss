@@ -23,8 +23,8 @@
             padding: 7px 14px;
             @include border-radius($borderRadius);
             
-            &.visitors {
-                background-color: #20d077;
+            &.deaths {
+                background-color: #e77e28;
             }
             
             &.purchases {
@@ -44,12 +44,12 @@
         .initials {
             height: 100%;
             float: left;
-            width: 50%;
+            width: 40%;
             text-align: center;
             padding: 1em;
 
             > span {
-                font-size: 48px;
+                font-size: 18px;
             }
         }
         
@@ -57,7 +57,7 @@
             height: 100%;
             background-color: #ffffff;
             float: left;
-            width: 50%;
+            width: 60%;
             padding: 1em;
 
             i {
