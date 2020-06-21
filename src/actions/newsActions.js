@@ -4,7 +4,7 @@ import {
 } from "./types";
 
 export const getPopularNews = (query) => (dispatch, getState) => {
-    axios.get("http://localhost:4000/news/byCountry?"+query)
+    axios.get("https://ctnewsback.herokuapp.com/news/byCountry?"+query)
     .then(result => {
         console.log(result.data)
         let articles = result.data.articles.filter(ar => ar.urlToImage !== null)
