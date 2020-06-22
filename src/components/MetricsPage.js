@@ -35,7 +35,11 @@ const MetricsPage = (props) => {
         getCountriesHistorical
     } = props
     const [filteredCountries, setFilteredCountries] = useState([])
+    const [filteredCountries1, setFilteredCountries1] = useState([])
+    const [filteredCountries2, setFilteredCountries2] = useState([])
     const [selectedCountry, setSelectedCountry] = useState(null)
+    const [selectedCountry1, setSelectedCountry1] = useState(null)
+    const [selectedCountry2, setSelectedCountry2] = useState(null)
     const [lineIndex, setLineIndex] = useState(0)
     const [dataState, setDataState] = useState({
         allHistorical: [],
@@ -107,14 +111,56 @@ const MetricsPage = (props) => {
         }, 250);
     }
 
+    const filterCountries1 = (event) => {
+        setTimeout(() => {
+            let results
+            if (event.query.length === 0) {
+                results = [...countriesNames]
+            }
+            else {
+                results = countriesNames.filter((country) => {
+                    return country.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
+            setFilteredCountries1(results);
+        }, 250);
+    }
+    const filterCountries2 = (event) => {
+        setTimeout(() => {
+            let results
+            if (event.query.length === 0) {
+                results = [...countriesNames]
+            }
+            else {
+                results = countriesNames.filter((country) => {
+                    return country.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
+            setFilteredCountries2(results);
+        }, 250);
+    }
+
     const onChange = (event) => {
         // console.log(event)
         setSelectedCountry(event.value)
+    }
+    const onChange1 = (event) => {
+        // console.log(event)
+        setSelectedCountry1(event.value)
+    }
+    const onChange2 = (event) => {
+        // console.log(event)
+        setSelectedCountry2(event.value)
     }
 
     const onSearchClick = () => {
         // console.log(selectedCountry)
         getCountryHistorical(selectedCountry)
+    }
+    const onSearchCamparisonClick = () => {
+        if (selectedCountry1 && selectedCountry2) {
+            getCountriesHistorical(selectedCountry1 + "," + selectedCountry2)
+        }
     }
 
     const itemTemplate = (country) => {
@@ -251,20 +297,50 @@ const MetricsPage = (props) => {
                             </div>
                         </div>
                         <div className="p-col-4">
-                            <AutoComplete style={{marginLeft: "-20%"}} value={selectedCountry} suggestions={filteredCountries} completeMethod={filterCountries} size={30} minLength={1}
+                            <AutoComplete style={{ marginLeft: "-20%" }} value={selectedCountry} suggestions={filteredCountries} completeMethod={filterCountries} size={30} minLength={1}
                                 placeholder="Search by country" dropdown={true} itemTemplate={itemTemplate} onChange={onChange} />
-                            <Button style={{marginLeft: "3%"}} label="Search" className="p-button-raised" onClick={onSearchClick} />
+                            <Button style={{ marginLeft: "3%" }} label="Search" className="p-button-raised" onClick={onSearchClick} />
                         </div>
                     </div>
-                    {dataState.countryHistorical ? 
-                        <LineChart 
-                            key={"chart2"} 
-                            country={dataState.countryHistorical.country} 
-                            data={selectLineModeCountry(dataState.countryHistorical, toShowType)} /> 
-                            : "Loading..."}
+                    {dataState.countryHistorical ?
+                        <LineChart
+                            key={"chart2"}
+                            country={dataState.countryHistorical.country}
+                            data={selectLineModeCountry(dataState.countryHistorical, toShowType)} />
+                        : "Loading..."}
                 </TabPanel>
                 <TabPanel header="Countries Comparison">
-                    Content III
+                    <div className="p-grid">
+                        <div className="p-col-2">
+                            <label htmlFor="cb2" className="p-checkbox-label">{"Switch to" + lineModeText() + " "}</label>
+                            <Checkbox inputId="cb2" checked={checkedExact} onChange={e => setCheckedExact(e.checked)} />
+                        </div>
+                        <div className="p-col-6">
+                            <div className="p-grid">
+                                <div className="p-col-3">
+                                    Lines to show
+                            </div>
+                                <div className="p-col-5" style={{ marginLeft: "-10%" }}>
+                                    <SelectButton inputId="type" value={toShowType} multiple={true} options={options} onChange={(e) => setToShowType(e.value)} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="p-col-4">
+                        </div>
+                        <AutoComplete  value={selectedCountry1} suggestions={filteredCountries1} completeMethod={filterCountries1} size={30} minLength={1}
+                            placeholder="First country" dropdown={true} itemTemplate={itemTemplate} onChange={onChange1} />
+                        <AutoComplete style={{ marginLeft: "-5%" }} value={selectedCountry2} suggestions={filteredCountries2} completeMethod={filterCountries2} size={30} minLength={1}
+                            placeholder="Second country" dropdown={true} itemTemplate={itemTemplate} onChange={onChange2} />
+                        <Button style={{ marginLeft: "3%" }} label="Search" className="p-button-raised" onClick={onSearchCamparisonClick} />
+                    </div>
+                    {dataState.countriesHistorical.length > 0 ?
+                        <LineChart
+                            key={"chart2"}
+                            // country={dataState.countryHistorical.country} 
+                            data={selectLineModeCountry(dataState.countriesHistorical[0], toShowType)}
+                            data2={selectLineModeCountry(dataState.countriesHistorical[1], toShowType)}
+                        />
+                        : "Loading..."}
                 </TabPanel>
             </TabView>
         </div>
