@@ -162,7 +162,7 @@ class App extends Component {
                     <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
                         <div className="layout-logo">
                             <div><img style={{width:"100px", height:"50px"}} alt="Logo" src={logo} /></div>
-                            <img style={{width:"75px", height:"75px"}} alt="Logo" src={covidLogo} />
+                            <img style={{width:"130px", height:"50px"}} alt="Logo" src={covidLogo} />
                         </div>
                         {/* <AppProfile /> */}
                         <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
