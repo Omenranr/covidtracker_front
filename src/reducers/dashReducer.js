@@ -4,6 +4,8 @@ import {
     COUNTRIES_LOADED,
     COUNTRY_LOADED,
     HISTORICAL_LOADED,
+    COUNTRY_PREDICTION,
+    COUNTRY_METRIC
 } from '../actions/types'
 
 const initialState = {
@@ -11,7 +13,9 @@ const initialState = {
     totalData: {},
     countriesHistorical: [],
     countryHistorical: null,
-    allHistorical: []
+    allHistorical: [],
+    countryPrediction: [],
+    countryMetricPrediction: null,
 }
 
 export default function(state=initialState, action) {
@@ -40,6 +44,16 @@ export default function(state=initialState, action) {
             return {
                 ...state,
                 countryHistorical: action.payload
+            }
+        case COUNTRY_PREDICTION:
+            return {
+                ...state,
+                countryPrediction: action.payload
+            }
+        case COUNTRY_METRIC:
+            return {
+                ...state,
+                countryMetricPrediction: action.payload
             }
         default:
             return state

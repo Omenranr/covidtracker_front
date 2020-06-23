@@ -96,6 +96,22 @@ const Dashboard = (props) => {
         return toShow
     }
 
+    const percentage = (data, type) => {
+        let perc
+        switch(type) {
+            case "active":
+                perc = data.active
+                break
+            case "deaths":
+                perc = data.deaths
+                break
+            case "recovered":
+                perc = data.recovered
+                break
+        }
+        return ((perc/data.cases)*100).toString().slice(0, 4)
+    }
+
     return (
         <div className="p-grid p-fluid dashboard">
             <div className="p-col-12 p-lg-4">
@@ -156,7 +172,9 @@ const Dashboard = (props) => {
             <div className="p-col-12 p-md-6 p-xl-3">
                 {dataState.totalData !== null && Object.keys(dataState.totalData).length !== 0 ?
                     <div className="highlight-box">
-                        <div className="initials" style={{ backgroundColor: '#007be5', color: '#ffff' }}><span>TOTAL</span></div>
+                        <div className="initials" style={{ backgroundColor: '#007be5', color: '#ffff' }}>
+                            <span>TOTAL</span>
+                        </div>
                         <div className="highlight-details ">
                             <i className="pi pi-search" />
                             <span>Total cases</span>
@@ -169,7 +187,10 @@ const Dashboard = (props) => {
             <div className="p-col-12 p-md-6 p-xl-3">
                 {dataState.totalData !== null && Object.keys(dataState.totalData).length !== 0 ?
                     <div className="highlight-box">
-                        <div className="initials" style={{ backgroundColor: '#e77e28', color: '#ffff' }}><span>ACTIVE</span></div>
+                        <div className="initials" style={{ backgroundColor: '#e77e28', color: '#ffff' }}>
+                            <span>ACTIVE</span>
+                            <div style={{fontSize: "24px"}}>{percentage(dataState.totalData, "active")+" %"}</div>
+                        </div>
                         <div className="highlight-details ">
                             <i className="pi pi-users" />
                             <span>Current actives</span>
@@ -182,7 +203,10 @@ const Dashboard = (props) => {
             <div className="p-col-12 p-md-6 p-xl-3">
                 {dataState.totalData !== null && Object.keys(dataState.totalData).length !== 0 ?
                     <div className="highlight-box">
-                        <div className="initials" style={{ backgroundColor: 'rgb(171, 26, 26)', color: '#ffff' }}><span>DEATHS</span></div>
+                        <div className="initials" style={{ backgroundColor: 'rgb(171, 26, 26)', color: '#ffff' }}>
+                            <span>DEATHS</span>
+                            <div style={{fontSize: "24px"}}>{percentage(dataState.totalData, "deaths")+" %"}</div>
+                        </div>
                         <div className="highlight-details ">
                             <i className="pi pi-times" />
                             <span>Total deaths</span>
@@ -195,7 +219,10 @@ const Dashboard = (props) => {
             <div className="p-col-12 p-md-6 p-xl-3">
                 {dataState.totalData !== null && Object.keys(dataState.totalData).length !== 0 ?
                 <div className="highlight-box">
-                    <div className="initials" style={{ backgroundColor: '#20d077', color: '#ffff' }}><span>RECOVERIES</span></div>
+                    <div className="initials" style={{ backgroundColor: '#20d077', color: '#ffff' }}>
+                        <span>RECOVERIES</span>
+                        <div style={{fontSize: "24px"}}>{percentage(dataState.totalData, "recovered")+" %"}</div>
+                    </div>
                     <div className="highlight-details ">
                         <i className="pi pi-check" />
                         <span>Total recoveries</span>

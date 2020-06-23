@@ -5,6 +5,8 @@ import {
     HISTORICAL_LOADED,
     COUNTRIES_LOADED,
     COUNTRY_LOADED,
+    COUNTRY_PREDICTION,
+    COUNTRY_METRIC,
 } from "./types";
 
 export const getCurrentData = () => (dispatch, getState) => {
@@ -44,5 +46,21 @@ export const getCountriesHistorical = (countries) => (dispatch, getState) => {
     .then(result => {
         console.log("countries historical", result.data)
         dispatch({type: COUNTRIES_LOADED, payload: result.data})
+    })
+}
+
+export const getCountryPrediction = (countryCode) => (dispatch, getState) => {
+    axios.get("http://springboot-cov19-api.herokuapp.com/api/prediction/"+countryCode, {headers:{'Access-Control-Allow-Origin': "*"}})
+    .then(result => {
+        console.log("country prediction", result.data)
+        dispatch({type: COUNTRY_PREDICTION, payload: result.data})
+    })
+}
+
+export const getMetricPrediction = (countryCode) => (dispatch, getState) => {
+    axios.get("http://springboot-cov19-api.herokuapp.com/api/metric/"+countryCode, {headers:{'Access-Control-Allow-Origin': "*"}})
+    .then(result => {
+        console.log("country metric prediction", result.data.statusList)
+        dispatch({type: COUNTRY_METRIC, payload: result.data.statusList})
     })
 }

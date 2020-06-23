@@ -93,7 +93,7 @@ const NewsPage = (props) => {
             <div className="p-grid">
                 <div className="p-col-6">
                     <div className="box">
-                        {newsState.length > 0 ? <NewsCard news={newsState[0]} />: ""}
+                        {newsState.length > 0 ? <NewsCard news={newsState[0]} />: "Loading..."}
                     </div>
                 </div>
                 <div className="p-col-6">
