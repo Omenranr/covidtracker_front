@@ -307,15 +307,19 @@ const MetricsPage = (props) => {
     }
 
     const selectLineMode = (data, lines) => {
-        return checkedExact ? mapToLineExact(data, lines) : mapToLineCum(data, lines)
+        if(data && lines.length > 0) {
+            return checkedExact ? mapToLineExact(data, lines) : mapToLineCum(data, lines)
+        }
     }
 
     const selectLineModeCountry = (data, lines) => {
-        return checkedExact ? mapToLineExactCountry(data, lines) : mapToLineCumCountry(data, lines)
+        if(data && lines.length > 0) {
+            return checkedExact ? mapToLineExactCountry(data, lines) : mapToLineCumCountry(data, lines)
+        }
     }
 
     const selectLineModePrediction = (data, lines) => {
-        if (data) {
+        if (data && lines.length > 0) {
             return checkedExact ? mapToLineExactCountry(data, lines) : mapToLineCumCountry(data, lines)
         }
     }

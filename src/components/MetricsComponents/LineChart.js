@@ -6,26 +6,26 @@ import '../../linechart.css'
 
 import React from 'react';
 import {Chart} from 'primereact/chart'
-import { processScopedUiProps } from '@fullcalendar/core'
 
 const LineChart = (props) => {
     const colors = {"cases": "#42A5F5", "deaths": "#FF0000", "recovered": "#66BB6A", "mean": "#00FF00", "r0value": "#000000"}
     const colors2 = {"cases": "#000000", "deaths": "#FF00FF", "recovered": "#FFAA00"}
     const labelNames = {"cases": "Cases", "deaths": "Deaths", "recovered": "Recovered", "mean": "Mean", "r0value": "R0"}
-    let data = {
-        labels: props.data.labels,
-        datasets: []
-    }
+    let data = {}
     let metric = {}
-    data.datasets = props.data.data.map((line, i) => {
-        return {
-            label: labelNames[props.data.lines[i]],
-            data: line,
-            fill: false,
-            backgroundColor: colors[props.data.lines[i]],
-            borderColor: colors[props.data.lines[i]],
-        }
-    })
+    if(props.data) {
+        data.labels = props.data.labels
+        data.datasets = []
+        data.datasets = props.data.data.map((line, i) => {
+            return {
+                label: labelNames[props.data.lines[i]],
+                data: line,
+                fill: false,
+                backgroundColor: colors[props.data.lines[i]],
+                borderColor: colors[props.data.lines[i]],
+            }
+        })
+    }
     if(props.data2) {
         props.data2.data.map((line, i) => {
             data.datasets.push({
